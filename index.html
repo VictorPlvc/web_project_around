@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alrededor de los EE.UU.</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body class="page">
+    <div class="page__content">
+      <header class="header">
+        <img
+          class="header__logo"
+          src="./images/logo.svg"
+          alt="Logotipo de Alrededor de los EE.UU."
+        />
+      </header>
+
+      <main class="content">
+        <section class="profile">
+          <img
+            class="profile__avatar"
+            src="./images/avatar.jpg"
+            alt="Foto de perfil del usuario"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button
+              class="profile__edit-button"
+              type="button"
+              aria-label="Editar perfil"
+            ></button>
+            <p class="profile__description">Explorador</p>
+          </div>
+          <button
+            class="profile__add-button"
+            type="button"
+            aria-label="Añadir tarjeta"
+          ></button>
+        </section>
+
+        <section class="elements">
+          <ul class="elements__list">
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/yosemite.jpg"
+                alt="Valle de Yosemite con montañas y bosque"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Yosemite</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/lake-louise.jpg"
+                alt="Lago Louise rodeado de montañas nevadas"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lago Louise</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/bald-mountains.jpg"
+                alt="Montañas Calvas al atardecer"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Montañas Calvas</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/latemar.jpg"
+                alt="Montaña Latemar bajo un cielo estrellado"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Latemar</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/vanoise.jpg"
+                alt="Lago de montaña en el Parque Nacional de la Vanoise"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Parque Nacional de la Vanoise</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/lago.jpg"
+                alt="Lago di Braies con barcas de madera"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lago di Braies</h2>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label="Me gusta"
+                ></button>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2026 Alrededor de los EE.UU.</p>
+      </footer>
+    </div>
+
+    <div class="popup">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="Cerrar"
+        ></button>
+        <h2 class="popup__title">Editar perfil</h2>
+        <form class="popup__form" name="profile-form">
+          <input
+            class="popup__input popup__input_type_name"
+            type="text"
+            name="name"
+            placeholder="Nombre"
+            aria-label="Nombre"
+            required
+          />
+          <input
+            class="popup__input popup__input_type_description"
+            type="text"
+            name="description"
+            placeholder="Acerca de mí"
+            aria-label="Acerca de mí"
+            required
+          />
+          <button class="popup__save-button" type="submit">Guardar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>
