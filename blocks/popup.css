@@ -88,6 +88,30 @@
   opacity: 0.8;
 }
 
+.popup_type_image {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.popup__figure {
+  position: relative;
+  margin: 0;
+}
+
+.popup__image {
+  display: block;
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.popup__caption {
+  margin-top: 10px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
 @media screen and (max-width: 620px) {
   .popup__container {
     width: 282px;

@@ -1,17 +1,19 @@
 # Alrededor de los EE.UU.
 
-Proyecto 7 del bootcamp de Desarrollo Web de TripleTen.
+Proyectos 7 y 8 del bootcamp de Desarrollo Web de TripleTen.
 
 ## Descripción
 
-"Alrededor de los EE.UU." es una página interactiva donde el usuario puede ver una galería de fotos de lugares y editar la información de su perfil.
+"Alrededor de los EE.UU." es una página interactiva donde el usuario puede ver una galería de fotos de lugares, añadir y eliminar tarjetas, darles "me gusta" y editar la información de su perfil.
 
 Funcionalidad actual:
 
-- Galería de seis tarjetas con foto y nombre del lugar.
-- Cuadro emergente "Editar perfil" que se abre con el botón de edición y se cierra con el botón de cierre.
-- Al abrirse, el formulario se rellena con el nombre y la descripción que aparecen en la página.
-- Al pulsar "Guardar" (o Enter), la página se actualiza con los nuevos datos y el cuadro emergente se cierra.
+- Seis tarjetas iniciales generadas con JavaScript a partir de un array y un elemento `<template>`.
+- Formulario "Nuevo lugar" (botón "+") para añadir una tarjeta con título y enlace a una imagen; la nueva tarjeta aparece al principio de la galería.
+- Botón "me gusta" que cambia de color al pulsarlo.
+- Botón de papelera para eliminar una tarjeta.
+- Al hacer clic en una foto se abre una ventana emergente con la imagen ampliada y su nombre.
+- Cuadro emergente "Editar perfil" que se rellena con los datos actuales y los actualiza al pulsar "Guardar" (o Enter).
 - Los textos demasiado largos se recortan con una elipsis.
 
 ## Tecnologías y técnicas
@@ -19,7 +21,7 @@ Funcionalidad actual:
 - HTML5 semántico
 - CSS3: Flexbox, Grid, media queries y diseño responsivo (de 320px a 1280px)
 - Metodología BEM y estructura de archivos BEM Flat
-- JavaScript: selección de elementos del DOM, `addEventListener`, manejo del evento `submit` y `classList`
+- JavaScript: selección de elementos del DOM, `addEventListener`, eventos `submit` y `click`, `classList`, `<template>` con `cloneNode`, `append`/`prepend`, `remove` y `closest`
 - Git con flujo de ramas `main`, `develop` y `feature/*`
 - GitHub Pages
 
