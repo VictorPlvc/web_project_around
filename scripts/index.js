@@ -1,35 +1,147 @@
-// Elementos del perfil en la página
+// Datos de las tarjetas iniciales
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+// Elementos del perfil
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const editButton = document.querySelector(".profile__edit-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const cardAddButton = document.querySelector(".profile__add-button");
 
-// Elementos del cuadro emergente
-const popup = document.querySelector(".popup");
-const closeButton = popup.querySelector(".popup__close-button");
-const formElement = popup.querySelector(".popup__form");
-const nameInput = formElement.querySelector(".popup__input_type_name");
-const jobInput = formElement.querySelector(".popup__input_type_description");
+// Contenedor y plantilla de las tarjetas
+const cardsList = document.querySelector(".elements__list");
+const cardTemplate = document.querySelector("#card-template").content;
 
-function openPopup() {
-  // Rellena los campos con los datos que aparecen en la página
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileDescription.textContent;
+// Ventana emergente "Editar perfil"
+const profilePopup = document.querySelector(".popup_type_edit-profile");
+const profileForm = profilePopup.querySelector(".popup__form");
+const nameInput = profileForm.querySelector(".popup__input_type_name");
+const descriptionInput = profileForm.querySelector(
+  ".popup__input_type_description"
+);
+
+// Ventana emergente "Nuevo lugar"
+const cardPopup = document.querySelector(".popup_type_add-card");
+const cardForm = cardPopup.querySelector(".popup__form");
+const cardNameInput = cardForm.querySelector(".popup__input_type_card-name");
+const cardLinkInput = cardForm.querySelector(".popup__input_type_url");
+
+// Ventana emergente de la imagen
+const imagePopup = document.querySelector(".popup_type_image");
+const popupImage = imagePopup.querySelector(".popup__image");
+const popupCaption = imagePopup.querySelector(".popup__caption");
+
+// Todos los botones de cerrar
+const closeButtons = document.querySelectorAll(".popup__close-button");
+
+function openPopup(popup) {
   popup.classList.add("popup_opened");
 }
 
-function closePopup() {
+function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-function handleProfileFormSubmit(evt) {
-  // Impide que el navegador recargue la página al enviar el formulario
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  closePopup();
+function handleLikeButtonClick(evt) {
+  evt.target.classList.toggle("card__like-button_active");
 }
 
-editButton.addEventListener("click", openPopup);
-closeButton.addEventListener("click", closePopup);
-formElement.addEventListener("submit", handleProfileFormSubmit);
+function handleDeleteButtonClick(evt) {
+  evt.target.closest(".card").remove();
+}
+
+function openImagePopup(cardData) {
+  popupImage.src = cardData.link;
+  popupImage.alt = cardData.name;
+  popupCaption.textContent = cardData.name;
+  openPopup(imagePopup);
+}
+
+// Crea y devuelve el elemento de una tarjeta a partir de sus datos
+function createCard(cardData) {
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardImage = cardElement.querySelector(".card__image");
+  const cardTitle = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardTitle.textContent = cardData.name;
+
+  likeButton.addEventListener("click", handleLikeButtonClick);
+  deleteButton.addEventListener("click", handleDeleteButtonClick);
+  cardImage.addEventListener("click", () => openImagePopup(cardData));
+
+  return cardElement;
+}
+
+function renderInitialCards() {
+  initialCards.forEach((cardData) => {
+    cardsList.append(createCard(cardData));
+  });
+}
+
+function openProfilePopup() {
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
+  openPopup(profilePopup);
+}
+
+function openCardPopup() {
+  cardForm.reset();
+  openPopup(cardPopup);
+}
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = descriptionInput.value;
+  closePopup(profilePopup);
+}
+
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
+  const newCard = createCard({
+    name: cardNameInput.value,
+    link: cardLinkInput.value,
+  });
+  cardsList.prepend(newCard);
+  closePopup(cardPopup);
+}
+
+closeButtons.forEach((closeButton) => {
+  const popup = closeButton.closest(".popup");
+  closeButton.addEventListener("click", () => closePopup(popup));
+});
+
+profileEditButton.addEventListener("click", openProfilePopup);
+cardAddButton.addEventListener("click", openCardPopup);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
+cardForm.addEventListener("submit", handleCardFormSubmit);
+
+renderInitialCards();
