@@ -55,15 +55,33 @@ const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const popupCaption = imagePopup.querySelector(".popup__caption");
 
-// Todos los botones de cerrar
+// Todas las ventanas emergentes y sus botones de cerrar
+const popups = document.querySelectorAll(".popup");
 const closeButtons = document.querySelectorAll(".popup__close-button");
+
+// Cierra la ventana emergente abierta al pulsar Escape
+function handleEscapeKey(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+// Cierra la ventana emergente al hacer clic en la superposición (fondo oscuro)
+function handleOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.currentTarget);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 function handleLikeButtonClick(evt) {
@@ -109,11 +127,13 @@ function renderInitialCards() {
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
+  resetValidation(profileForm, validationConfig);
   openPopup(profilePopup);
 }
 
 function openCardPopup() {
   cardForm.reset();
+  resetValidation(cardForm, validationConfig);
   openPopup(cardPopup);
 }
 
@@ -137,6 +157,10 @@ function handleCardFormSubmit(evt) {
 closeButtons.forEach((closeButton) => {
   const popup = closeButton.closest(".popup");
   closeButton.addEventListener("click", () => closePopup(popup));
+});
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", handleOverlayClick);
 });
 
 profileEditButton.addEventListener("click", openProfilePopup);
