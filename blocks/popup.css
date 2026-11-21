@@ -90,7 +90,7 @@
   opacity: 1;
 }
 
-.popup__save-button {
+.popup__button {
   height: 50px;
   margin-top: 18px;
   padding: 0;
@@ -105,18 +105,18 @@
   transition: opacity 0.3s ease;
 }
 
-.popup__save-button:hover {
+.popup__button:hover {
   opacity: 0.8;
 }
 
-.popup__save-button_disabled {
+.popup__button_disabled {
   border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: transparent;
   color: rgba(0, 0, 0, 0.2);
   cursor: default;
 }
 
-.popup__save-button_disabled:hover {
+.popup__button_disabled:hover {
   opacity: 1;
 }
 
@@ -162,7 +162,7 @@
     font-size: 18px;
   }
 
-  .popup__save-button {
+  .popup__button {
     height: 46px;
     font-size: 14px;
   }
