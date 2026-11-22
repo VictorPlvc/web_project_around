@@ -1,6 +1,6 @@
 # Alrededor de los EE.UU.
 
-Proyectos 7, 8 y 9 del bootcamp de Desarrollo Web de TripleTen.
+Proyectos 7, 8, 9 y 10 del bootcamp de Desarrollo Web de TripleTen.
 
 ## Descripción
 
@@ -17,6 +17,7 @@ Funcionalidad actual:
 - Validación de los formularios en tiempo real: mensajes de error bajo cada campo y botón de envío desactivado mientras haya datos no válidos.
 - Las ventanas emergentes se cierran con el botón de cierre, con la tecla Escape o haciendo clic en el fondo oscuro.
 - Los textos demasiado largos se recortan con una elipsis.
+- Código organizado con programación orientada a objetos: las clases `Card` y `FormValidator` viven en módulos separados y se importan en `index.js`.
 
 ## Tecnologías y técnicas
 
@@ -24,6 +25,7 @@ Funcionalidad actual:
 - CSS3: Flexbox, Grid, media queries y diseño responsivo (de 320px a 1280px)
 - Metodología BEM y estructura de archivos BEM Flat
 - JavaScript: selección de elementos del DOM, `addEventListener`, eventos `submit` y `click`, `classList`, `<template>` con `cloneNode`, `append`/`prepend`, `remove` y `closest`; validación de formularios con la API `validity` y un objeto de configuración; eventos `keydown`, `input` y `mousedown`
+- Programación orientada a objetos: clases, encapsulación (métodos privados con `_`) y módulos ES6 (`import`/`export`, `<script type="module">`)
 - Git con flujo de ramas `main`, `develop` y `feature/*`
 - GitHub Pages
 
