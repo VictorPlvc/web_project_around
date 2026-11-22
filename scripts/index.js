@@ -1,3 +1,7 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { openPopup, closePopup, handleOverlayClick } from "./utils.js";
+
 // Datos de las tarjetas iniciales
 const initialCards = [
   {
@@ -26,15 +30,26 @@ const initialCards = [
   },
 ];
 
+// Configuración de la validación: selectores y clases de los formularios
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const cardTemplateSelector = "#card-template";
+
 // Elementos del perfil
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const cardAddButton = document.querySelector(".profile__add-button");
 
-// Contenedor y plantilla de las tarjetas
+// Contenedor de las tarjetas
 const cardsList = document.querySelector(".elements__list");
-const cardTemplate = document.querySelector("#card-template").content;
 
 // Ventana emergente "Editar perfil"
 const profilePopup = document.querySelector(".popup_type_edit-profile");
@@ -59,63 +74,21 @@ const popupCaption = imagePopup.querySelector(".popup__caption");
 const popups = document.querySelectorAll(".popup");
 const closeButtons = document.querySelectorAll(".popup__close-button");
 
-// Cierra la ventana emergente abierta al pulsar Escape
-function handleEscapeKey(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
+// Un validador para cada formulario
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+const cardFormValidator = new FormValidator(validationConfig, cardForm);
 
-// Cierra la ventana emergente al hacer clic en la superposición (fondo oscuro)
-function handleOverlayClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.currentTarget);
-  }
-}
-
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscapeKey);
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscapeKey);
-}
-
-function handleLikeButtonClick(evt) {
-  evt.target.classList.toggle("card__like-button_active");
-}
-
-function handleDeleteButtonClick(evt) {
-  evt.target.closest(".card").remove();
-}
-
-function openImagePopup(cardData) {
+function handleCardClick(cardData) {
   popupImage.src = cardData.link;
   popupImage.alt = cardData.name;
   popupCaption.textContent = cardData.name;
   openPopup(imagePopup);
 }
 
-// Crea y devuelve el elemento de una tarjeta a partir de sus datos
+// Crea una tarjeta con la clase Card y devuelve su elemento
 function createCard(cardData) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardTitle.textContent = cardData.name;
-
-  likeButton.addEventListener("click", handleLikeButtonClick);
-  deleteButton.addEventListener("click", handleDeleteButtonClick);
-  cardImage.addEventListener("click", () => openImagePopup(cardData));
-
-  return cardElement;
+  const card = new Card(cardData, cardTemplateSelector, handleCardClick);
+  return card.generateCard();
 }
 
 function renderInitialCards() {
@@ -127,13 +100,13 @@ function renderInitialCards() {
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  resetValidation(profileForm, validationConfig);
+  profileFormValidator.resetValidation();
   openPopup(profilePopup);
 }
 
 function openCardPopup() {
   cardForm.reset();
-  resetValidation(cardForm, validationConfig);
+  cardFormValidator.resetValidation();
   openPopup(cardPopup);
 }
 
@@ -167,5 +140,8 @@ profileEditButton.addEventListener("click", openProfilePopup);
 cardAddButton.addEventListener("click", openCardPopup);
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 renderInitialCards();
