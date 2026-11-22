@@ -15,11 +15,14 @@ export default class FormValidator {
     );
   }
 
+  // Devuelve el elemento del mensaje de error de un campo
+  _getErrorElement(inputElement) {
+    return this._formElement.querySelector(`.${inputElement.id}-error`);
+  }
+
   // Muestra el mensaje de error debajo del campo
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(
-      `.${inputElement.id}-error`
-    );
+    const errorElement = this._getErrorElement(inputElement);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
@@ -27,9 +30,7 @@ export default class FormValidator {
 
   // Oculta el mensaje de error del campo
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(
-      `.${inputElement.id}-error`
-    );
+    const errorElement = this._getErrorElement(inputElement);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
