@@ -120,6 +120,14 @@
   opacity: 1;
 }
 
+.popup__title_type_confirm {
+  margin-bottom: 38px;
+}
+
+.popup__button_type_confirm {
+  margin-top: 0;
+}
+
 .popup_type_image {
   background-color: rgba(0, 0, 0, 0.9);
 }
@@ -160,6 +168,10 @@
   .popup__title {
     margin-bottom: 75px;
     font-size: 18px;
+  }
+
+  .popup__title_type_confirm {
+    margin-bottom: 38px;
   }
 
   .popup__button {
