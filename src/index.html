@@ -18,11 +18,18 @@
 
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="./images/avatar.jpg"
-            alt="Foto de perfil del usuario"
-          />
+          <div class="profile__avatar-container">
+            <img
+              class="profile__avatar"
+              src="./images/avatar.jpg"
+              alt="Foto de perfil del usuario"
+            />
+            <button
+              class="profile__avatar-edit-button"
+              type="button"
+              aria-label="Cambiar foto de perfil"
+            ></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button
@@ -73,7 +80,7 @@
           <input
             class="popup__input popup__input_type_description"
             type="text"
-            name="job"
+            name="about"
             placeholder="Acerca de mí"
             aria-label="Acerca de mí"
             required
@@ -119,6 +126,47 @@
           />
           <span class="popup__error url-input-error"></span>
           <button class="popup__button" type="submit">Crear</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="Cerrar"
+        ></button>
+        <h2 class="popup__title">Cambiar foto de perfil</h2>
+        <form class="popup__form" name="avatar-form" novalidate>
+          <input
+            class="popup__input popup__input_type_url"
+            type="url"
+            name="avatar"
+            placeholder="Enlace a la imagen"
+            aria-label="Enlace a la imagen"
+            required
+            id="avatar-input"
+          />
+          <span class="popup__error avatar-input-error"></span>
+          <button class="popup__button" type="submit">Guardar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="Cerrar"
+        ></button>
+        <h2 class="popup__title popup__title_type_confirm">¿Estás seguro?</h2>
+        <form class="popup__form" name="confirm-form" novalidate>
+          <button
+            class="popup__button popup__button_type_confirm"
+            type="submit"
+          >Sí</button>
         </form>
       </div>
     </div>
